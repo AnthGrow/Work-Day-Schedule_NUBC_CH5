@@ -8,6 +8,11 @@ $(document).ready(function() {
 
     // var rootEl = $('#root');
 
+  // const currentDay = dayjs();
+  // const currentDay = dayjs().format('dddd');
+  var today = dayjs().format('dddd, MMMM D');
+  var currentDayElement = document.getElementById('currentDay');
+  currentDayElement.textContent = today;
 
   $(function () {
 
