@@ -10,13 +10,52 @@ $(document).ready(function() {
 
   // const currentDay = dayjs();
   // const currentDay = dayjs().format('dddd');
-  var today = dayjs().format('dddd, MMMM D');
+  var today = dayjs().format('dddd, MMMM D , hh:mm A');
   var currentDayElement = document.getElementById('currentDay');
   currentDayElement.textContent = today;
 
   $(function () {
 
-    
+    // Get the current hour using day.js
+var currentHour = dayjs().hour();
+
+// loop over the hours from 8AM to 5PM
+for (var hour = 8; hour <= 17; hour++) {
+  // create a variable for the container div with the corresponding ID
+  var container = $('#hour-' + hour);
+
+  // check if the current hour is greater than the hour for this container
+  if (currentHour > hour) {
+    container.addClass('past');
+  }
+  // check if the current hour is equal to the hour for this container
+  else if (currentHour === hour) {
+    container.addClass('present');
+  }
+  // otherwise, the current hour must be less than the hour for this container
+  else {
+    container.addClass('future');
+  }
+}
+
+// Get the current hour using day.js
+var currentHour = dayjs().hour();
+
+// Loop through each element with the class "time-block"
+$(".time-block").each(function() {
+  // Get the hour of the current element from its ID
+  var elementHour = parseInt($(this).attr("id").split("-")[1]);
+
+  // Compare the current hour with the element hour
+  if (currentHour < elementHour) {
+    $(this).addClass("future");
+  } else if (currentHour === elementHour) {
+    $(this).addClass("present");
+  } else {
+    $(this).addClass("past");
+  }
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -54,45 +93,12 @@ $(".time-block").each(function() {
   }
 });
  
-// Get the current hour using day.js
-var currentHour = dayjs().hour();
 
-// Loop through each element with the class "time-block"
-$(".time-block").each(function() {
-  // Get the hour of the current element from its ID
-  var elementHour = parseInt($(this).attr("id").split("-")[1]);
 
-  // Compare the current hour with the element hour
-  if (currentHour < elementHour) {
-    $(this).addClass("future");
-  } else if (currentHour === elementHour) {
-    $(this).addClass("present");
-  } else {
-    $(this).addClass("past");
-  }
+  
 });
 
-// Get the current hour using day.js
-var currentHour = dayjs().hour();
 
-// loop over the hours from 8AM to 5PM
-for (var hour = 8; hour <= 17; hour++) {
-  // create a variable for the container div with the corresponding ID
-  var container = $('#hour-' + hour);
-
-  // check if the current hour is greater than the hour for this container
-  if (currentHour > hour) {
-    container.addClass('past');
-  }
-  // check if the current hour is equal to the hour for this container
-  else if (currentHour === hour) {
-    container.addClass('present');
-  }
-  // otherwise, the current hour must be less than the hour for this container
-  else {
-    container.addClass('future');
-  }
-}
 
 
 // // Select the container element using its ID
